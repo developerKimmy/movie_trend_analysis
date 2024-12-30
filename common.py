@@ -2,6 +2,7 @@ import pandas as pd
 import csv
 from urllib.parse import urljoin
 import re
+import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -14,6 +15,25 @@ def read_csv(name):
     df = pd.read_csv(name)
     print("csv 파일 읽기 완료")
     return df
+
+def get_all_paths(PATH):
+    """폴더 내의 모든 파일 경로를 반환"""
+    print("폴더 내의 모든 파일 경로 반환 시작")
+    paths = [os.path.join(PATH, file) for file in os.listdir(PATH) if os.path.isfile(os.path.join(PATH, file))]
+    print("폴더 내의 모든 파일 경로 반환 완료")
+    return paths
+
+def get_file_name(path):
+    """파일 경로에서 파일 이름을 반환"""
+    print("파일 경로에서 파일 이름 반환 시작")
+    file_name, file_extension = os.path.basename(path).split(".")
+    
+    file_name_data = {
+        "file_name": file_name,
+        "file_extension": file_extension
+    }
+    print("파일 경로에서 파일 이름 반환 완료")
+    return file_name_data
 
 def get_df_ready(df):
     """데이터프레임을 딕셔너리 리스트로 변환"""

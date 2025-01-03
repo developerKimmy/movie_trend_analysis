@@ -60,7 +60,7 @@ def get_filtered_by_genres(movie_list):
 def export_csv(sub_categories, main_category):
     print("csv로 저장하기")        
     for key, value in sub_categories.items():
-        filename = f"C:\\Users\\Suin Kim\\Desktop\\movie_trend_analysis\\DATA\\PROCESSED DATA\\{main_category}_{key}.csv"
+        filename = f"C:\\Users\\Suin Kim\\Desktop\\movie_trend_analysis\\DATA\\PROCESSED DATA\\DETAILS\\{main_category}_{key}.csv"
         save_csv_df(filename,['imdbID','title','year','kind','original title','localized title','rating','genres','country','countries'], value)
         print(f"Saved {filename}")
     print("csv로 저장 완료")    
@@ -82,7 +82,7 @@ def main():
     genre = get_filtered_by_genres(movie_list)
     export_csv(genre, "genre")
     
-    print("main 함수 완료료")
+    print("main 함수 완료")
     
 if __name__ == "__main__":
     main()

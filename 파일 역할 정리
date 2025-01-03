@@ -1,0 +1,30 @@
+# 파일 간 상관관계 및 역할 정리
+
+1. Crawing/get_movie_list.py
+   - 역할: IMDb Top 250 영화 목록에서 영화 URL을 수집하고, 영화 이름을 추출하여 CSV 파일로 저장
+   - 상관관계: `Crawing/get_movie_details.py`에서 사용할 영화 목록을 제공
+
+2. Crawing/get_movie_details.py
+   - 역할: IMDb API를 사용하여 영화의 상세 정보를 수집
+   - 상관관계: `Crawing/get_movie_list.py`에서 수집한 영화 목록을 기반으로 상세 정보를 가져옴
+
+3. Crawing/get_review_data.py
+   - 역할: 수집한 영화의 리뷰 데이터를 IMDb에서 가져와 CSV 파일로 저장
+   - 상관관계: `Crawing/get_movie_list.py`에서 수집한 영화 URL을 기반으로 리뷰 데이터를 수집
+
+4. Preprocessing/category_filter_detail.py
+   - 역할: 수집된 영화 상세 정보를 특정 기준으로 필터링하여 전처리
+   - 상관관계: `Crawing/get_movie_details.py`에서 수집한 영화 상세 정보를 전처리
+
+5. Preprocessing/category_filter_review.py
+   - 역할: 수집된 리뷰 데이터를 특정 기준(예: 국가, 장르 등)으로 필터링하여 전처리
+   - 상관관계: `Crawing/get_review_data.py`에서 수집한 리뷰 데이터를 전처리하여 `Analyzing/get_tf_idf.py`에서 사용
+
+6. Analyzing/get_tf_idf.py
+   - 역할: 영화 리뷰 데이터를 기반으로 TF-IDF 분석을 수행하여 영화의 주요 키워드를 추출
+   - 상관관계: `Preprocessing/category_filter_review.py`에서 전처리된 리뷰 데이터를 사용하여 분석
+
+7. common.py
+   - 역할: 여러 파일에서 공통으로 사용되는 유틸리티 함수들을 제공
+   - 상관관계: 모든 파일에서 공통적으로 사용되어 코드의 중복을 줄이고, 기능을 모듈화
+
